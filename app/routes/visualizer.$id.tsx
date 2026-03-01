@@ -20,7 +20,32 @@ const VisualizerId = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [currentImage, setCurrentImage] = useState<string | null>(null);
 
+    const [isSharing, setIsSharing] = useState(false);
+
     const handleBack = () => navigate('/');
+    const handleShare = async () => {
+        if (!currentImage || !project) return;
+
+        try {
+            setIsSharing(true);
+            const nextVisibility = project.isPublic ? 'private' : 'public';
+            const updatedItem = {
+                ...project,
+                renderedImage: currentImage,
+                isPublic: !project.isPublic,
+            };
+
+            const saved = await createProject({ item: updatedItem, visibility: nextVisibility });
+
+            if (saved) {
+                setProject(saved);
+            }
+        } catch (error) {
+            console.error('Failed to toggle share status:', error);
+        } finally {
+            setIsSharing(false);
+        }
+    }
     const handleExport = () => {
         if (!currentImage) return;
 
@@ -142,9 +167,14 @@ const VisualizerId = () => {
                             >
                                 <Download className="w-4 h-4 mr-2" /> Export
                             </Button>
-                            <Button size="sm" onClick={() => {}} className="share">
+                            <Button
+                                size="sm"
+                                onClick={handleShare}
+                                className="share"
+                                disabled={!currentImage || isSharing}
+                            >
                                 <Share2 className="w-4 h-4 mr-2" />
-                                Share
+                                {project?.isPublic ? 'Unshare' : 'Share'}
                             </Button>
                         </div>
                     </div>
