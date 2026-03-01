@@ -54,7 +54,7 @@ export default function Home() {
 
                               </div>
                               <h3>Upload your floor plan</h3>
-                              <p>Supports JPG, PNG, formats up to 10mb</p>
+                              <p>Supports JPG, PNG, formats up to 50mb</p>
 
 
                           </div>
