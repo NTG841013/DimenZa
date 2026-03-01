@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import {useOutletContext} from "react-router";
 import {CheckCircle2, ImageIcon, UploadIcon} from "lucide-react";
 import type {AuthContext, UploadProps} from "../type";
