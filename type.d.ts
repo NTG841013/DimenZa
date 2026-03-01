@@ -12,7 +12,7 @@ interface Material {
     category: "floor" | "wall" | "furniture";
 }
 
-interface DesignItem {
+export interface DesignItem {
     id: string;
     name?: string | null;
     sourceImage: string;
