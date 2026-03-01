@@ -59,6 +59,10 @@ export default function App() {
 
   const refreshAuth = async () => {
     try {
+      if (!puter.auth.isSignedIn()) {
+        setAuthState(DEFAULT_AUTH_STATE);
+        return false;
+      }
       const user = await puter.auth.getUser();
 
       setAuthState({
